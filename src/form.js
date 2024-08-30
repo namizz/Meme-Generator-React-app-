@@ -22,7 +22,6 @@ export default function Meme() {
     getMemes();
   }, []);
 
-  console.log(allMeme);
   function getMemeImage(event) {
     console.log("Image Generator");
     event.preventDefault();

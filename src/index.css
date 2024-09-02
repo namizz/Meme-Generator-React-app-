@@ -60,10 +60,11 @@ h2 {
   width: 100%;
   text-align: center;
   color: #000;
-  font-size: 5vw;
+  font-size: 3vw;
   color: #fff;
   text-shadow: -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black,
     2px 2px 0 black;
+  max-width: 90%;
 }
 #top-text {
   top: 0.3em;

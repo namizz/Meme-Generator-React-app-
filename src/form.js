@@ -53,13 +53,16 @@ export default function Meme() {
         />
       </div>
       <button type="button" id="image geter" onClick={getMemeImage}>
-        Get a new meme image{" "}
+        Get a random meme image{" "}
       </button>
       <div id="image">
-        <img id="meme-image" src={meme.randomImage} />
+        <img id="meme-image" src={meme.randomImage} alt="" />
         <h2 id="top-text">{meme.topText}</h2>
         <h2 id="bottom-text">{meme.bottomText}</h2>
       </div>
+      /* Here there is an idea to add property which is to add a divsion. The
+      division has a bunches of image which is generated from the api, then when
+      they are selected change the meme image */
     </form>
   );
 }

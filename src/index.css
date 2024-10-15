@@ -44,7 +44,8 @@ button {
 }
 
 #meme-image,
-button {
+button,
+#images {
   font-size: 1.2vw;
   width: 60vw;
 }
@@ -71,4 +72,18 @@ h2 {
 }
 #bottom-text {
   bottom: 0.5em;
+}
+#select {
+  color: #000;
+}
+#image {
+  align-items: center;
+  display: flex;
+}
+.i {
+  border: 1px solid #000;
+  width: 15em;
+  margin: 0 auto;
+  flex-direction: e;
+  height: 15em;
 }

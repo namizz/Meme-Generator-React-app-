@@ -17,12 +17,13 @@ export default function Meme() {
     async function getMemes() {
       const res = await fetch("https://api.imgflip.com/get_memes");
       const data = await res.json();
+      console.log(data);
       setAllMeme(data.data.memes);
     }
     getMemes();
   }, []);
 
-  function getMemeImage(event) {
+  function getRandomMemeImage(event) {
     console.log("Image Generator");
     event.preventDefault();
     const randomNumber = Math.floor(Math.random() * allMeme.length);
@@ -32,6 +33,25 @@ export default function Meme() {
       ...prevMeme,
       randomImage: url,
     }));
+  }
+  function getSelectedImage(url) {
+    console.log("Image Selected");
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      randomImage: url,
+    }));
+  }
+
+  function Images() {
+    return allMeme.map((image, index) => (
+      <img
+        id={index}
+        src={image.url}
+        alt="i"
+        className="i"
+        onClick={() => getSelectedImage(image.url)}
+      />
+    ));
   }
 
   return (
@@ -52,7 +72,7 @@ export default function Meme() {
           onChange={handleChange}
         />
       </div>
-      <button type="button" id="image geter" onClick={getMemeImage}>
+      <button type="button" id="image geter" onClick={getRandomMemeImage}>
         Get a random meme image{" "}
       </button>
       <div id="image">
@@ -63,6 +83,12 @@ export default function Meme() {
       /* Here there is an idea to add property which is to add a divsion. The
       division has a bunches of image which is generated from the api, then when
       they are selected change the meme image */
+      <div id="image-collection">
+        <h3 id="select">Select Image below</h3>
+        <div id="images">
+          <Images />
+        </div>
+      </div>
     </form>
   );
 }

@@ -56,7 +56,7 @@ button,
   position: relative;
   display: inline-block;
 }
-h2 {
+/* h2 {
   position: absolute;
   width: 100%;
   text-align: center;
@@ -72,7 +72,7 @@ h2 {
 }
 #bottom-text {
   bottom: 0.5em;
-}
+} */
 #select {
   color: #000;
 }

@@ -5,6 +5,7 @@ export default function Meme() {
     topText: "",
     bottomText: "",
     randomImage: "http://i.imgflip.com/1bij.jpg",
+    templateId: "",
   });
   const [allMeme, setAllMeme] = React.useState([]);
   const handleChange = function (event) {
@@ -17,45 +18,72 @@ export default function Meme() {
     async function getMemes() {
       const res = await fetch("https://api.imgflip.com/get_memes");
       const data = await res.json();
-      console.log(data);
       setAllMeme(data.data.memes);
     }
     getMemes();
   }, []);
 
-  function getRandomMemeImage(event) {
+  function getMemeImage(event) {
     console.log("Image Generator");
     event.preventDefault();
     const randomNumber = Math.floor(Math.random() * allMeme.length);
-    const url = allMeme[randomNumber].url;
-    console.log(url);
+    const meme = allMeme[randomNumber];
     setMeme((prevMeme) => ({
       ...prevMeme,
-      randomImage: url,
+      randomImage: meme.url,
+      templateId: meme.id,
     }));
   }
-  function getSelectedImage(url) {
-    console.log("Image Selected");
-    setMeme((prevMeme) => ({
-      ...prevMeme,
-      randomImage: url,
-    }));
-  }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log("meme", meme);
+    const { templateId, topText, bottomText } = meme;
+    if (!templateId) {
+      alert("Please select an image before submitting.");
+      return;
+    }
+    if (!topText || !bottomText) {
+      alert("Please enter text for both fields.");
+      return;
+    }
+    console.log(templateId, topText, bottomText);
+    try {
+      const response = await fetch("https://api.imgflip.com/caption_image", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          template_id: templateId,
+          username: "nathanaelcheramlak", // Add your Imgflip username here
+          password: "UAF@3vt9NUZ3ak2", // Add your Imgflip password here
+          text0: topText,
+          text1: bottomText,
+        }),
+      });
+      if (!response.ok) {
+        console.error(`HTTP error! status: ${response.status}`);
+        alert("Failed to generate meme. Please try again.");
+        return;
+      }
 
-  function Images() {
-    return allMeme.map((image, index) => (
-      <img
-        id={index}
-        src={image.url}
-        alt="i"
-        className="i"
-        onClick={() => getSelectedImage(image.url)}
-      />
-    ));
-  }
+      const data = await response.json();
+      console.log("data", data);
+      if (data.success) {
+        setMeme((prevMeme) => ({
+          ...prevMeme,
+          randomImage: data.data.url,
+        }));
+      } else {
+        console.error("Error:", data.error_message);
+      }
+    } catch (error) {
+      console.error("Error submitting meme:", error);
+    }
+  };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <div id="inputs">
         <input
           type="text"
@@ -72,7 +100,7 @@ export default function Meme() {
           onChange={handleChange}
         />
       </div>
-      <button type="button" id="image geter" onClick={getRandomMemeImage}>
+      <button type="button" id="image geter" onClick={getMemeImage}>
         Get a random meme image{" "}
       </button>
       <div id="image">
@@ -80,13 +108,27 @@ export default function Meme() {
         <h2 id="top-text">{meme.topText}</h2>
         <h2 id="bottom-text">{meme.bottomText}</h2>
       </div>
-      /* Here there is an idea to add property which is to add a divsion. The
-      division has a bunches of image which is generated from the api, then when
-      they are selected change the meme image */
+      <button type="submit" id="submit-meme">
+        Submit Meme
+      </button>
       <div id="image-collection">
         <h3 id="select">Select Image below</h3>
         <div id="images">
-          <Images />
+          {allMeme.map((image, index) => (
+            <img
+              key={image.id}
+              src={image.url}
+              alt="meme"
+              className="i"
+              onClick={() =>
+                setMeme({
+                  ...meme,
+                  randomImage: image.url,
+                  templateId: image.id,
+                })
+              }
+            />
+          ))}
         </div>
       </div>
     </form>

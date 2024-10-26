@@ -90,7 +90,7 @@ button,
   flex-direction: e;
   height: 15em;
 }
-@media (min-width: 1366px) and (max-width: 1920px) {
+@media (min-width: 1800px) and (max-width: 1980px) {
   input {
     margin: 0 7vw;
     padding: 0;

@@ -1,5 +1,5 @@
 # Meme Generator app
-
+<img src='https://github.com/namizz/Meme-Generator-React-app-/blob/main/images/Screenshot%20(45).png'>
 <img src='https://github.com/namizz/Meme-Generator-React-app-/blob/main/images/Screenshot%20(46).png'>
 ### Instruction
 

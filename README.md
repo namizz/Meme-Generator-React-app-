@@ -1,7 +1,13 @@
 # Meme Generator app
 <img src='https://github.com/namizz/Meme-Generator-React-app-/blob/main/images/Screenshot%20(45).png'>
 <img src='https://github.com/namizz/Meme-Generator-React-app-/blob/main/images/Screenshot%20(46).png'>
-### Instruction
+
+<h5>Instruction to use the app</h5>
+<ol>
+  <li>Clone the code</li>
+  <li>Install dependancies</li>
+  <li>Run <code>npm run</code> on you terminal</li>
+</ol>
 
 
 

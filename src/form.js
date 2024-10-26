@@ -100,17 +100,20 @@ export default function Meme() {
           onChange={handleChange}
         />
       </div>
-      <button type="button" id="image geter" onClick={getMemeImage}>
-        Get a random meme image{" "}
-      </button>
+      <div id="buttons">
+        <button type="submit" id="submit-meme">
+          Add text on the image
+        </button>
+        <button type="button" id="image geter" onClick={getMemeImage}>
+          Get a random meme image{" "}
+        </button>
+      </div>
       <div id="image">
         <img id="meme-image" src={meme.randomImage} alt="" />
         <h2 id="top-text">{meme.topText}</h2>
         <h2 id="bottom-text">{meme.bottomText}</h2>
       </div>
-      <button type="submit" id="submit-meme">
-        Submit Meme
-      </button>
+
       <div id="image-collection">
         <h3 id="select">Select Image below</h3>
         <div id="images">
